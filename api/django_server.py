@@ -1,4 +1,4 @@
-// api/django_server.py
+# api/django_server.py
 import os
 import sys
 from pathlib import Path

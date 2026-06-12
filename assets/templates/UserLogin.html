@@ -1,0 +1,77 @@
+{%extends 'base.html'%}
+{%load static%}
+{% block title %}User Login{% endblock %}
+{% block banner %}{% endblock %}
+{%block contents%}
+<section class="login-section py-5">
+    <div class="container">
+        <div class="row justify-content-center align-items-center" style="min-height: 500px;">
+            <div class="col-12 col-sm-10 col-md-6 col-lg-5">
+                <div class="section-card login-card">
+                    <div class="text-center mb-4">
+                        <h1 class="h2 font-weight-bold text-dark mb-2">User Login</h1>
+                        <p class="text-muted">Sign in to access your dashboard</p>
+                    </div>
+
+                    {% if messages %}
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        {% for message in messages %}
+                        <strong>{{ message }}</strong>
+                        {% endfor %}
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    {% endif %}
+
+                    <form action="{%url 'UserLoginCheck'%}" method="POST" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        
+                        <div class="form-group mb-3">
+                            <label for="loginid" class="form-label font-weight-600">Login ID</label>
+                            <input type="text" class="form-control form-control-lg" id="loginid" name="loginid" 
+                                   placeholder="Enter your login ID" required>
+                            <div class="invalid-feedback">Please provide a login ID.</div>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="pswd" class="form-label font-weight-600">Password</label>
+                            <input type="password" class="form-control form-control-lg" id="pswd" name="pswd" 
+                                   placeholder="Enter your password" required>
+                            <div class="invalid-feedback">Please provide a password.</div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg btn-block mb-2 font-weight-600">Sign In</button>
+                        <button type="reset" class="btn btn-outline-secondary btn-lg btn-block font-weight-600">Clear</button>
+                    </form>
+
+                    <div class="text-center mt-4">
+                        <p class="mb-0 text-muted">
+                            Don't have an account? 
+                            <a href="{%url 'UserRegister'%}" class="font-weight-600 text-primary">Create one</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+(function() {
+    'use strict';
+    window.addEventListener('load', function() {
+        var forms = document.getElementsByClassName('needs-validation');
+        var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+})();
+</script>
+{%endblock%}

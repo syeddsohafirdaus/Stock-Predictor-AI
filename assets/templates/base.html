@@ -1,0 +1,453 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Professional AI-powered stock market prediction platform with LSTM forecasting and real-time chat.">
+    <title>{% block title %}StockAI — Intelligent Market Predictions{% endblock %}</title>
+
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet" integrity="sha512-Bj3xVf1+IjNrcF47WTYZG5WuDPOyS2lJfYr972ZKCYzCHVUEV+1MZIe2NfXep5tVB6R0sJ6A5hUwjRkD9r8T6g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #1f5fea;
+            --primary-dark: #1747bf;
+            --dark-bg: #0a2540;
+            --darker-bg: #071a2e;
+            --accent: #ffd166;
+            --card-bg: #ffffff;
+            --body-bg: #f0f4fb;
+            --text-main: #1e2d3d;
+            --text-muted: #6b7a8d;
+            --border: #e0e8f0;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--body-bg);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        /* ── NAVBAR ── */
+        .main-navbar {
+            background: var(--dark-bg);
+            padding: 0 1rem;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
+        .main-navbar .navbar-brand {
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: #fff !important;
+            letter-spacing: 0.5px;
+        }
+        .main-navbar .navbar-brand span { color: var(--accent); }
+        .main-navbar .nav-link {
+            color: rgba(255,255,255,0.82) !important;
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 1.1rem 1rem !important;
+            transition: color 0.2s;
+        }
+        .main-navbar .nav-link:hover { color: var(--accent) !important; }
+        .main-navbar .navbar-toggler { border-color: rgba(255,255,255,0.3); }
+        .main-navbar .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255,255,255,0.8%29' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+        .page-content { margin-top: 64px; flex: 1; }
+        /* ── HERO BANNER ── */
+        .hero-banner {
+            background: linear-gradient(135deg, var(--darker-bg) 0%, #0d3060 50%, #1a4a8a 100%);
+            min-height: 540px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(31,95,234,0.2) 0%, transparent 70%);
+            top: -100px; right: -100px;
+            border-radius: 50%;
+        }
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(255,209,102,0.08) 0%, transparent 70%);
+            bottom: -80px; left: 10%;
+            border-radius: 50%;
+        }
+        .hero-banner .container { position: relative; z-index: 2; }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(31,95,234,0.2);
+            border: 1px solid rgba(31,95,234,0.4);
+            color: #93b4ff;
+            padding: 0.35rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+        .hero-banner h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.1;
+            color: #ffffff;
+            margin-bottom: 1.25rem;
+        }
+        .hero-banner h1 .highlight { color: var(--accent); }
+        .hero-banner p.lead {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.75);
+            max-width: 560px;
+            margin-bottom: 2rem;
+        }
+        .hero-stats {
+            display: flex;
+            gap: 2.5rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .hero-stat-val {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #fff;
+            display: block;
+        }
+        .hero-stat-label {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.55);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        /* ── DASHBOARD HERO ── */
+        .dash-hero {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1a3a6e 100%);
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+        .dash-hero h2 { font-weight: 700; color: #fff; margin-bottom: 0.4rem; }
+        .dash-hero p { color: rgba(255,255,255,0.7); margin: 0; font-size: 0.95rem; }
+        /* ── CARDS ── */
+        .card-modern {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 1.75rem;
+            box-shadow: 0 4px 24px rgba(10,37,64,0.08);
+            border: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .card-modern:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(10,37,64,0.12); }
+        .card-modern h3, .card-modern h4 { font-weight: 700; color: var(--text-main); }
+        /* ── KPI CARDS ── */
+        .kpi-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+            transition: transform 0.25s ease;
+        }
+        .kpi-card:hover { transform: translateY(-4px); }
+        .kpi-card.kpi-success { border-left-color: var(--success); }
+        .kpi-card.kpi-danger  { border-left-color: var(--danger); }
+        .kpi-card.kpi-warning { border-left-color: var(--warning); }
+        .kpi-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-muted); }
+        .kpi-value { font-size: 2rem; font-weight: 800; color: var(--text-main); line-height: 1.2; margin: 0.25rem 0; }
+        .kpi-sub   { font-size: 0.8rem; color: var(--text-muted); }
+        /* ── BUTTONS ── */
+        .btn-primary {
+            background: var(--primary) !important;
+            border-color: var(--primary) !important;
+            font-weight: 600;
+            border-radius: 10px;
+            padding: 0.6rem 1.5rem;
+            box-shadow: 0 4px 14px rgba(31,95,234,0.3);
+            transition: all 0.2s;
+        }
+        .btn-primary:hover { background: var(--primary-dark) !important; border-color: var(--primary-dark) !important; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(31,95,234,0.4); }
+        .btn-outline-light { border-radius: 10px; font-weight: 500; }
+        .btn-pill { border-radius: 50px !important; }
+        /* ── TABLES ── */
+        .table-modern { border-collapse: collapse; width: 100%; }
+        .table-modern thead th {
+            background: #f0f4fb;
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 1rem 1.25rem;
+            border: none;
+        }
+        .table-modern tbody td {
+            padding: 0.9rem 1.25rem;
+            border-top: 1px solid var(--border);
+            color: #3d5166;
+            font-size: 0.92rem;
+            vertical-align: middle;
+        }
+        .table-modern tbody tr:hover { background: #f8fbff; }
+        /* Auto-style Pandas .dataframe */
+        .dataframe { width: 100% !important; border-collapse: collapse; }
+        .dataframe thead tr th {
+            background: #f0f4fb !important;
+            color: var(--text-main) !important;
+            font-weight: 700 !important;
+            font-size: 0.8rem !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+            padding: 1rem 1.25rem !important;
+            border: none !important;
+            border-bottom: 2px solid var(--border) !important;
+        }
+        .dataframe tbody td {
+            padding: 0.9rem 1.25rem !important;
+            border-top: 1px solid var(--border) !important;
+            color: #3d5166 !important;
+            font-size: 0.92rem !important;
+        }
+        .dataframe tbody tr:hover { background: #f8fbff !important; }
+        /* ── CHAT ── */
+        .chat-wrap {
+            background: linear-gradient(160deg, #0a2540 0%, #0d3366 100%);
+            border-radius: 24px;
+            overflow: hidden;
+            min-height: 540px;
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-header {
+            padding: 1.5rem 1.75rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            background: rgba(0,0,0,0.15);
+        }
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            min-height: 320px;
+            max-height: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .chat-bubble {
+            max-width: 85%;
+            padding: 0.85rem 1.1rem;
+            border-radius: 16px;
+            font-size: 0.9rem;
+            line-height: 1.55;
+            animation: fadeInUp 0.3s ease;
+        }
+        .chat-bubble.user {
+            background: rgba(255,255,255,0.95);
+            color: #0a2540;
+            margin-left: auto;
+            border-bottom-right-radius: 4px;
+        }
+        .chat-bubble.assistant {
+            background: rgba(31,95,234,0.25);
+            color: #e8f0ff;
+            border-bottom-left-radius: 4px;
+        }
+        .chat-bubble.typing { opacity: 0.6; font-style: italic; }
+        .chat-footer {
+            padding: 1rem 1.75rem 1.5rem;
+            display: flex;
+            gap: 0.75rem;
+            background: rgba(0,0,0,0.15);
+        }
+        .chat-input {
+            flex: 1;
+            background: rgba(255,255,255,0.1) !important;
+            border: 1px solid rgba(255,255,255,0.2) !important;
+            border-radius: 12px !important;
+            color: #fff !important;
+            padding: 0.75rem 1rem !important;
+            font-size: 0.9rem !important;
+        }
+        .chat-input::placeholder { color: rgba(255,255,255,0.45) !important; }
+        .chat-input:focus { outline: none; border-color: rgba(31,95,234,0.6) !important; box-shadow: 0 0 0 3px rgba(31,95,234,0.15) !important; }
+        /* ── BADGE ── */
+        .badge-pill { border-radius: 50px; padding: 0.4em 0.9em; font-weight: 600; font-size: 0.78rem; }
+        .badge-active  { background: #d1fae5; color: #065f46; }
+        .badge-waiting { background: #fef3c7; color: #92400e; }
+        /* ── FORMS ── */
+        .form-control, .form-select {
+            border-radius: 10px !important;
+            border: 1.5px solid var(--border) !important;
+            padding: 0.7rem 1rem !important;
+            font-size: 0.95rem !important;
+            transition: all 0.2s !important;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary) !important;
+            box-shadow: 0 0 0 3px rgba(31,95,234,0.12) !important;
+        }
+        label { font-weight: 500; font-size: 0.9rem; color: var(--text-main); margin-bottom: 0.4rem; display: block; }
+        /* ── ALERTS ── */
+        .alert { border: none; border-radius: 12px; }
+        /* ── FOOTER ── */
+        .site-footer {
+            background: var(--darker-bg);
+            color: rgba(255,255,255,0.55);
+            padding: 1.75rem 0;
+            text-align: center;
+            font-size: 0.88rem;
+        }
+        .site-footer a { color: rgba(255,255,255,0.7); text-decoration: none; }
+        /* ── ANIMATIONS ── */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(14px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { animation: fadeInUp 0.5s ease forwards; }
+        .fade-in-1 { animation: fadeInUp 0.5s 0.1s ease both; }
+        .fade-in-2 { animation: fadeInUp 0.5s 0.2s ease both; }
+        .fade-in-3 { animation: fadeInUp 0.5s 0.3s ease both; }
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .hero-banner h1 { font-size: 2.1rem; }
+            .hero-stats { gap: 1.25rem; flex-wrap: wrap; }
+            .kpi-value { font-size: 1.6rem; }
+        }
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="main-navbar navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'index' %}">
+                <i class="fas fa-chart-line me-2" style="color:var(--accent)"></i>Stock<span>AI</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}"><i class="fas fa-home me-1"></i>Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'ai_chat_page' %}"><i class="fas fa-robot me-1"></i>AI Chat</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'UserLogin' %}"><i class="fas fa-sign-in-alt me-1"></i>Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'UserRegister' %}"><i class="fas fa-user-plus me-1"></i>Register</a></li>
+                    <li class="nav-item ms-2"><a class="btn btn-primary btn-pill px-3 py-2 text-white" style="font-size:0.85rem;" href="{% url 'AdminLogin' %}"><i class="fas fa-shield-alt me-1"></i>Admin</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-content">
+        {% block banner %}
+        <!-- HERO SECTION -->
+        <section class="hero-banner">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-7">
+                        <div class="fade-in">
+                            <span class="hero-badge"><i class="fas fa-bolt me-1"></i> AI-Powered Forecasting</span>
+                            <h1>Predict Markets with <span class="highlight">Intelligent AI</span></h1>
+                            <p class="lead">LSTM neural networks trained on Amazon stock data. Explore datasets, run predictions, and chat with our AI market advisor.</p>
+                            <div class="d-flex flex-wrap gap-3">
+                                <a href="{% url 'UserLogin' %}" class="btn btn-primary btn-lg btn-pill px-4">
+                                    <i class="fas fa-rocket me-2"></i>Get Started
+                                </a>
+                                <a href="{% url 'ai_chat_page' %}" class="btn btn-outline-light btn-lg btn-pill px-4">
+                                    <i class="fas fa-robot me-2"></i>Try AI Chat
+                                </a>
+                            </div>
+                            <div class="hero-stats fade-in-2">
+                                <div><span class="hero-stat-val">LSTM</span><span class="hero-stat-label">Model</span></div>
+                                <div><span class="hero-stat-val">AMZN</span><span class="hero-stat-label">Asset</span></div>
+                                <div><span class="hero-stat-val">AI</span><span class="hero-stat-label">Chat</span></div>
+                                <div><span class="hero-stat-val">Live</span><span class="hero-stat-label">Forecasting</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 d-none d-lg-flex justify-content-center fade-in-3">
+                        <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:24px;padding:2rem;width:320px;">
+                            <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:1rem;">LSTM Price Forecast</div>
+                            <div style="display:flex;flex-direction:column;gap:0.6rem;">
+                                {% for label, val, up in forloop_data|default:"" %}{% endfor %}
+                                <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.07);padding:0.6rem 1rem;border-radius:10px;">
+                                    <span style="color:rgba(255,255,255,0.75);font-size:0.85rem;">Day 1</span>
+                                    <span style="color:#6ee7b7;font-weight:700;">$3,842 <i class="fas fa-arrow-up" style="font-size:0.7rem"></i></span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.07);padding:0.6rem 1rem;border-radius:10px;">
+                                    <span style="color:rgba(255,255,255,0.75);font-size:0.85rem;">Day 2</span>
+                                    <span style="color:#6ee7b7;font-weight:700;">$3,891 <i class="fas fa-arrow-up" style="font-size:0.7rem"></i></span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.07);padding:0.6rem 1rem;border-radius:10px;">
+                                    <span style="color:rgba(255,255,255,0.75);font-size:0.85rem;">Day 3</span>
+                                    <span style="color:#fca5a5;font-weight:700;">$3,867 <i class="fas fa-arrow-down" style="font-size:0.7rem"></i></span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.07);padding:0.6rem 1rem;border-radius:10px;">
+                                    <span style="color:rgba(255,255,255,0.75);font-size:0.85rem;">Day 4</span>
+                                    <span style="color:#6ee7b7;font-weight:700;">$3,920 <i class="fas fa-arrow-up" style="font-size:0.7rem"></i></span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.07);padding:0.6rem 1rem;border-radius:10px;">
+                                    <span style="color:rgba(255,255,255,0.75);font-size:0.85rem;">Day 5</span>
+                                    <span style="color:#6ee7b7;font-weight:700;">$3,958 <i class="fas fa-arrow-up" style="font-size:0.7rem"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endblock %}
+
+        <main>
+            {% block contents %}{% endblock %}
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <p class="mb-1"><strong style="color:rgba(255,255,255,0.8)"><i class="fas fa-chart-line me-2" style="color:var(--accent)"></i>StockAI</strong> — International Stock Prediction Platform</p>
+            <p class="mb-0">Built with Django &amp; AI-powered forecasting. <span style="color:rgba(255,255,255,0.3);">|</span> For educational purposes only.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation Library -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 800,
+        once: true
+      });
+    </script>
+    <!-- Chart.js for interactive charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>

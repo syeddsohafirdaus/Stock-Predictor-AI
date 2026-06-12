@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}User Dashboard{% endblock %}
+{% block banner %}{% endblock %}
+{% block contents %}
+<section class="dashboard-hero py-5 mb-4 rounded-3 text-white" style="background: linear-gradient(135deg, #0a2540 0%, #1f5fea 100%); box-shadow: 0 10px 35px rgba(31, 95, 234, 0.15); margin-top: -20px; border-radius: 24px;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h2 class="mb-2 font-weight-bold">User Dashboard</h2>
+                <p class="mb-0 text-white-75">Access stock datasets, execute machine learning forecasts, run predictive models, and converse with the AI market agent.</p>
+            </div>
+            <div class="col-md-4 text-md-right mt-4 mt-md-0">
+                <a href="{% url 'view_dataset' %}" class="btn btn-outline-light btn-sm px-3 py-2 mr-2 mb-2" style="border-radius: 20px; font-weight: 500;">📊 Dataset</a>
+                <a href="{% url 'user_machine_learning' %}" class="btn btn-outline-light btn-sm px-3 py-2 mr-2 mb-2" style="border-radius: 20px; font-weight: 500;">🧠 ML Prediction</a>
+                <a href="{% url 'user_future_prediction' %}" class="btn btn-outline-light btn-sm px-3 py-2 mr-2 mb-2" style="border-radius: 20px; font-weight: 500;">📈 LSTM Forecast</a>
+                <a href="{% url 'ai_chat_page' %}" class="btn btn-light btn-sm px-4 py-2 mb-2" style="border-radius: 20px; font-weight: 600; color: #0a2540; box-shadow: 0 4px 10px rgba(255,255,255,0.2);">🤖 AI Chat</a>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container py-2">
+    {% block user_content %}{% endblock %}
+</div>
+{% endblock %}

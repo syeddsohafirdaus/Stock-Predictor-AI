@@ -1,0 +1,90 @@
+{%extends 'base.html'%}
+{%load static%}
+{% block title %}
+Admin Login
+{% endblock %}
+{% block banner %}{% endblock %}
+{%block contents%}
+<!--<style>-->
+<!--    .bg-light{-->
+<!--    margin-top: -500px;-->
+<!--    background: #65cd00;-->
+<!--    padding:10px;-->
+<!--    }-->
+
+<!--</style>-->
+
+
+{%block contents%}
+<section class="login-section py-5" style="background: linear-gradient(135deg, #081f3a 0%, #223f6a 100%);">
+    <div class="container">
+        <div class="row justify-content-center align-items-center" style="min-height: 500px;">
+            <div class="col-12 col-sm-10 col-md-6 col-lg-5">
+                <div class="section-card login-card admin-login-card" style="background: #ffffff; box-shadow: 0 30px 60px rgba(0,0,0,0.3);">
+                    <div class="text-center mb-4">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔐</div>
+                        <h1 class="h2 font-weight-bold text-dark mb-2">Admin Portal</h1>
+                        <p class="text-muted">Administrator access only</p>
+                    </div>
+
+                    {% if messages %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        {% for message in messages %}
+                        <strong>⚠️ {{ message }}</strong>
+                        {% endfor %}
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    {% endif %}
+
+                    <form action="{%url 'AdminLoginCheck'%}" method="POST" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        
+                        <div class="form-group mb-3">
+                            <label for="admin-loginid" class="form-label font-weight-600">Admin ID</label>
+                            <input type="text" class="form-control form-control-lg" id="admin-loginid" name="loginid" 
+                                   placeholder="Enter admin ID" required>
+                            <div class="invalid-feedback">Please provide an admin ID.</div>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="admin-pswd" class="form-label font-weight-600">Password</label>
+                            <input type="password" class="form-control form-control-lg" id="admin-pswd" name="pswd" 
+                                   placeholder="Enter password" required>
+                            <div class="invalid-feedback">Please provide a password.</div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg btn-block mb-2 font-weight-600" style="background: #1f5fea;">Sign In</button>
+                        <button type="reset" class="btn btn-outline-secondary btn-lg btn-block font-weight-600">Clear</button>
+                    </form>
+
+                    <div class="text-center mt-4 text-muted small">
+                        <p>Unauthorized access is prohibited</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+(function() {
+    'use strict';
+    window.addEventListener('load', function() {
+        var forms = document.getElementsByClassName('needs-validation');
+        var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+})();
+</script>
+{%endblock%}
+
+{%endblock%}

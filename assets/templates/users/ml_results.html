@@ -1,0 +1,58 @@
+{% extends 'users/userbase.html' %}
+{% block user_content %}
+<div class="row animate-fade-in-up">
+    <!-- Main Results Column -->
+    <div class="col-12 col-lg-8 mb-4">
+        <div class="section-card">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 class="font-weight-bold text-dark mb-0">📊 Model Evaluation Dashboard</h3>
+                <span class="badge badge-secondary py-2 px-3" style="background: #1f5fea;">XGBoost + ARIMA Metrics</span>
+            </div>
+            
+            <p class="text-muted mb-4">The predictions have run successfully. Below are the key statistical error metrics derived from evaluating our trained regressors on the testing subset.</p>
+
+            <div class="row mb-4">
+                <div class="col-md-6 mb-3">
+                    <div class="kpi-card danger">
+                        <div class="kpi-label">Mean Squared Error (MSE)</div>
+                        <div class="kpi-value text-danger">{{ results.error|floatformat:4 }}</div>
+                        <span class="small text-muted">Averaged squared prediction errors</span>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="kpi-card success">
+                        <div class="kpi-label">Root Mean Squared Error (RMSE)</div>
+                        <div class="kpi-value text-success">{{ results.rmse|floatformat:4 }}</div>
+                        <span class="small text-muted">Standard deviation of the residuals</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-info d-flex align-items-center">
+                <div style="font-size: 1.5rem; margin-right: 1rem;">🤖</div>
+                <div>
+                    <strong>Need help interpreting these metrics?</strong> Open the AI Assistant page to ask the chatbot how these values impact your trading strategies.
+                    <a href="{% url 'ai_chat_page' %}" class="alert-link d-block mt-1">Go to AI Chat &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: Explanations -->
+    <div class="col-12 col-lg-4 mb-4">
+        <div class="section-card h-100">
+            <h4 class="font-weight-bold mb-3">Understanding the Metrics</h4>
+            <hr class="my-3">
+            
+            <h6 class="font-weight-bold text-dark mb-2">📉 Mean Squared Error (MSE)</h6>
+            <p class="small text-muted mb-4">MSE measures the average of the squares of the errors. A lower MSE indicates that the model predictions are closer to the real stock prices.</p>
+            
+            <h6 class="font-weight-bold text-dark mb-2">📈 Root Mean Squared Error (RMSE)</h6>
+            <p class="small text-muted mb-4">RMSE represents the square root of the MSE. It gives the error in the original units (USD), indicating on average how many dollars the forecast deviates from the actual closing prices.</p>
+
+            <h6 class="font-weight-bold text-dark mb-2">🚀 Platform Suggestion</h6>
+            <p class="small text-muted mb-0">For volatile tech assets like Amazon (AMZN), RMSE values are expected to fluctuate. We recommend retraining the model regularly as fresh daily transaction data becomes available.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

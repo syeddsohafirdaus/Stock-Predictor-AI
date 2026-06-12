@@ -1,0 +1,28 @@
+{% extends 'admins/adminbase.html' %}
+{% block contents %}
+<div class="container my-5 animate-fade-in-up">
+    <div class="row justify-content-center">
+        <div class="col-12 col-xl-10">
+            <div class="section-card border-0" style="background: #ffffff; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); padding: 2.5rem;">
+                <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
+                    <div>
+                        <h3 class="font-weight-bold text-dark mb-1">🔮 Future Forecasting Results</h3>
+                        <p class="text-muted mb-0 small">Admin view of the generated Amazon (AMZN) stock prediction dataset</p>
+                    </div>
+                    <span class="badge py-2 px-3 text-white" style="background: #1f5fea; border-radius: 30px;">Attention LSTM</span>
+                </div>
+                
+                <p class="text-muted mb-4">The recurrent neural model has completed the sequence extrapolation. Below are the generated forecasts representing the next trading days' estimated prices.</p>
+                
+                <div class="table-responsive">
+                    {{ data|safe }}
+                </div>
+                
+                <div class="mt-4 pt-3 border-top text-right">
+                    <a href="{% url 'AdminHome' %}" class="btn btn-outline-secondary px-4" style="border-radius: 12px; font-weight: 600;">&larr; Back to Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

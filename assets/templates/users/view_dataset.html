@@ -1,0 +1,42 @@
+{% extends 'users/userbase.html' %}
+{% block user_content %}
+<div class="row animate-fade-in-up">
+    <!-- Main Dataset Preview -->
+    <div class="col-12 col-lg-8 mb-4">
+        <div class="section-card">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 class="font-weight-bold text-dark mb-0">📊 Historical Dataset Preview</h3>
+                <span class="badge badge-secondary py-2 px-3" style="background: #0f2551;">AMZN Daily Data</span>
+            </div>
+            
+            <p class="text-muted mb-4">Below is a preview of the Amazon stock dataset loaded in our machine learning models. This table represents the latest records including daily open, high, low, close, and volume.</p>
+            
+            <div class="table-responsive">
+                {{ data|safe }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Dataset Info Column -->
+    <div class="col-12 col-lg-4 mb-4">
+        <div class="section-card">
+            <h4 class="font-weight-bold mb-3">Dataset Schema</h4>
+            <hr class="my-3">
+            <p class="small text-muted mb-3">The dataset contains historical indicators necessary for technical training:</p>
+            <ul class="list-unstyled small text-muted">
+                <li class="mb-2"><strong>📅 Date:</strong> Session trading date</li>
+                <li class="mb-2"><strong>📈 Open:</strong> Initial transaction price</li>
+                <li class="mb-2"><strong>🚀 High:</strong> Maximum session price</li>
+                <li class="mb-2"><strong>📉 Low:</strong> Minimum session price</li>
+                <li class="mb-2"><strong>🏁 Close:</strong> Final market closing price</li>
+                <li class="mb-2"><strong>📦 Volume:</strong> Number of shares traded</li>
+            </ul>
+        </div>
+
+        <div class="section-card mt-4">
+            <h5 class="font-weight-bold mb-3">💡 Training Setup</h5>
+            <p class="small text-muted mb-0">This CSV is automatically partitioned into training (65%) and testing (35%) divisions. It generates moving averages (7/21 days), MACD, Bollinger Bands, and Fourier components before initiating model training.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

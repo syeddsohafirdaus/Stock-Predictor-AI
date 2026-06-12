@@ -1,0 +1,15 @@
+{
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/django_server.py" },
+    { "source": "/(.*)", "destination": "/frontend/$1" }
+  ],
+  "functions": {
+    "api/django_server.py": {
+      "runtime": "python3.11"
+    }
+  },
+  "builds": [
+    { "src": "frontend/package.json", "use": "@vercel/static-build", "config": { "distDir": "frontend" } },
+    { "src": "api/django_server.py", "use": "@vercel/python", "config": { "maxLambdaSize": "15mb" } }
+  ]
+}

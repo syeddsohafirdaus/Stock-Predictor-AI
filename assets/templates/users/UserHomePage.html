@@ -1,0 +1,85 @@
+{% extends 'users/userbase.html' %}
+{% block user_content %}
+<div class="row animate-fade-in-up">
+    <!-- Greeting Card -->
+    <div class="col-12 mb-4">
+        <div class="section-card border-0" style="background: #ffffff; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h3 class="font-weight-bold text-dark mb-2">Welcome Back, {{ request.session.loggeduser }}!</h3>
+                    <p class="text-muted mb-0">Explore your personal portal for real-time dataset analysis, LSTM neural predictions, and AI-driven market chat.</p>
+                </div>
+                <div class="d-none d-md-block" style="font-size: 3rem;">👋</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Stats Row -->
+<div class="row animate-fade-in-up delay-1">
+    <div class="col-md-6 col-lg-3 mb-4">
+        <div class="kpi-card">
+            <div class="kpi-label">Target Asset</div>
+            <div class="kpi-value">AMZN</div>
+            <span class="small text-muted">Amazon.com Inc.</span>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3 mb-4">
+        <div class="kpi-card success">
+            <div class="kpi-label">Neural Model</div>
+            <div class="kpi-value" style="font-size: 1.8rem;">LSTM + Attn</div>
+            <span class="small text-muted">Long Short-Term Memory</span>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3 mb-4">
+        <div class="kpi-card warning">
+            <div class="kpi-label">Data Frequency</div>
+            <div class="kpi-value">Daily</div>
+            <span class="small text-muted">Historical Stock Feed</span>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3 mb-4">
+        <div class="kpi-card success">
+            <div class="kpi-label">Status</div>
+            <div class="kpi-value">Ready</div>
+            <span class="small text-muted">All systems operational</span>
+        </div>
+    </div>
+</div>
+
+<!-- Feature Navigation Grid -->
+<div class="row animate-fade-in-up delay-2 mt-2">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 border-0 text-center py-4 px-3" style="border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); transition: transform 0.3s ease;">
+            <div class="card-body">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">📊</div>
+                <h5 class="font-weight-bold text-dark">Explore Dataset</h5>
+                <p class="card-text text-muted small mb-4">View the raw Amazon historical stock dataset records directly in a clean layout.</p>
+                <a href="{% url 'view_dataset' %}" class="btn btn-primary btn-block" style="border-radius: 12px; font-weight: 600;">View Records</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 border-0 text-center py-4 px-3" style="border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); transition: transform 0.3s ease;">
+            <div class="card-body">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">🧠</div>
+                <h5 class="font-weight-bold text-dark">Run ML Predictor</h5>
+                <p class="card-text text-muted small mb-4">Execute predictions and evaluate metrics including RMSE and validation errors.</p>
+                <a href="{% url 'user_machine_learning' %}" class="btn btn-primary btn-block" style="border-radius: 12px; font-weight: 600;">Run Model</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 border-0 text-center py-4 px-3" style="border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); transition: transform 0.3s ease;">
+            <div class="card-body">
+                <div style="font-size: 2.5rem; margin-bottom: 1rem;">📈</div>
+                <h5 class="font-weight-bold text-dark">Future Forecasts</h5>
+                <p class="card-text text-muted small mb-4">Generate upcoming stock price forecasts powered by the attention LSTM layers.</p>
+                <a href="{% url 'user_future_prediction' %}" class="btn btn-primary btn-block" style="border-radius: 12px; font-weight: 600;">View Forecast</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

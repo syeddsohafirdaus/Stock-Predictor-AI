@@ -1,0 +1,121 @@
+{%extends 'base.html'%}
+{%load static%}
+{% block title %}
+User Registration
+{% endblock %}
+{% block banner %}{% endblock %}
+{%block contents%}
+<!--<style>-->
+<!--    .bg-light{-->
+<!--    margin-top: -500px;-->
+<!--    background: #65cd00;-->
+<!--    padding:10px;-->
+<!--    }-->
+
+<!--</style>-->
+  <section class="registration-section py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+                <div class="section-card">
+                    <div class="text-center mb-4">
+                        <h1 class="h2 font-weight-bold text-dark mb-2">Create Your Account</h1>
+                        <p class="text-muted">Join our platform to access stock predictions and market insights</p>
+                    </div>
+
+                    {% if messages %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {% for message in messages %}
+                        <strong>❌ {{ message }}</strong>
+                        {% endfor %}
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    {% endif %}
+
+                    <form action="{%url 'UserRegisterActions'%}" method="POST" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        
+                        <div class="form-row">
+                            <div class="form-group col-md-12 mb-3">
+                                <label for="name" class="form-label font-weight-600">Full Name</label>
+                                {{form.name}}
+                                <small class="text-muted">Enter your full name</small>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6 mb-3">
+                                <label for="loginid" class="form-label font-weight-600">Login ID</label>
+                                {{form.loginid}}
+                                <small class="text-muted">Unique username for login</small>
+                            </div>
+                            <div class="form-group col-md-6 mb-3">
+                                <label for="password" class="form-label font-weight-600">Password</label>
+                                {{form.password}}
+                                <small class="text-muted">Secure password</small>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6 mb-3">
+                                <label for="mobile" class="form-label font-weight-600">Mobile Number</label>
+                                {{form.mobile}}
+                                <small class="text-muted">10-digit mobile number</small>
+                            </div>
+                            <div class="form-group col-md-6 mb-3">
+                                <label for="email" class="form-label font-weight-600">Email Address</label>
+                                {{form.email}}
+                                <small class="text-muted">Valid email address</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="address" class="form-label font-weight-600">Street Address</label>
+                            {{form.address}}
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6 mb-3">
+                                <label for="locality" class="form-label font-weight-600">Locality</label>
+                                {{form.locality}}
+                            </div>
+                            <div class="form-group col-md-6 mb-3">
+                                <label for="city" class="form-label font-weight-600">City</label>
+                                {{form.city}}
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="state" class="form-label font-weight-600">State</label>
+                            {{form.state}}
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg btn-block mb-2 font-weight-600">Create Account</button>
+                        <a href="{%url 'UserLogin'%}" class="btn btn-outline-secondary btn-lg btn-block font-weight-600">Already have an account? Sign In</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+(function() {
+    'use strict';
+    window.addEventListener('load', function() {
+        var forms = document.getElementsByClassName('needs-validation');
+        var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+})();
+</script>
+{%endblock%}

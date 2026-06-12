@@ -1,0 +1,135 @@
+{%extends 'base.html'%}
+{%load static%}
+{% block title %}Home Page{% endblock %}
+{%block contents%}
+
+<!-- Features Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="h1 font-weight-bold mb-3">Powerful AI-Driven Stock Prediction Platform</h2>
+                <p class="lead text-muted">Leverage machine learning and AI to make informed investment decisions</p>
+            </div>
+        </div>
+
+        <div class="row feature-grid">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 border-0">
+                    <div class="card-body">
+                        <div class="feature-icon">📊</div>
+                        <h5 class="card-title font-weight-bold">Neural Networks</h5>
+                        <p class="card-text text-muted">Advanced deep learning models using Keras and TensorFlow for accurate predictions</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 border-0">
+                    <div class="card-body">
+                        <div class="feature-icon">🤖</div>
+                        <h5 class="card-title font-weight-bold">AI Chat Assistant</h5>
+                        <p class="card-text text-muted">Get instant insights and market guidance from our intelligent AI chatbot</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 border-0">
+                    <div class="card-body">
+                        <div class="feature-icon">📈</div>
+                        <h5 class="card-title font-weight-bold">Future Forecasting</h5>
+                        <p class="card-text text-muted">Predict future stock trends using LSTM, XGBoost, and statistical models</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 border-0">
+                    <div class="card-body">
+                        <div class="feature-icon">📉</div>
+                        <h5 class="card-title font-weight-bold">ML Analysis</h5>
+                        <p class="card-text text-muted">Comprehensive machine learning analysis with scikit-learn algorithms</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 border-0">
+                    <div class="card-body">
+                        <div class="feature-icon">💾</div>
+                        <h5 class="card-title font-weight-bold">Real Data</h5>
+                        <p class="card-text text-muted">Access and analyze real stock market datasets for better decision making</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 border-0">
+                    <div class="card-body">
+                        <div class="feature-icon">🔐</div>
+                        <h5 class="card-title font-weight-bold">Secure Access</h5>
+                        <p class="card-text text-muted">Secure user authentication and data protection for your peace of mind</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Technology Stack Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-4">
+                <h2 class="h2 font-weight-bold mb-3">Built With Modern Technologies</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="section-card">
+                    <h5 class="font-weight-bold mb-3">Machine Learning Stack</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">✓ <strong>TensorFlow & Keras</strong> - Deep Neural Networks</li>
+                        <li class="mb-2">✓ <strong>Scikit-learn</strong> - Classification & Regression</li>
+                        <li class="mb-2">✓ <strong>XGBoost</strong> - Gradient Boosting Models</li>
+                        <li class="mb-2">✓ <strong>Pandas & NumPy</strong> - Data Processing</li>
+                        <li class="mb-2">✓ <strong>Statsmodels</strong> - Time Series Analysis</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="section-card">
+                    <h5 class="font-weight-bold mb-3">Web & AI Stack</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">✓ <strong>Django 5.2</strong> - Web Framework</li>
+                        <li class="mb-2">✓ <strong>Bootstrap 5</strong> - Responsive Design</li>
+                        <li class="mb-2">✓ <strong>DialoGPT</strong> - AI Chatbot</li>
+                        <li class="mb-2">✓ <strong>PyTorch</strong> - Deep Learning</li>
+                        <li class="mb-2">✓ <strong>Transformers</strong> - NLP Models</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="h2 font-weight-bold mb-4">Ready to Get Started?</h2>
+                <p class="lead text-muted mb-4">Create an account or sign in to access our powerful prediction tools</p>
+                <div>
+                    <a href="{%url 'UserRegister'%}" class="btn btn-primary btn-lg mx-2 mb-2">Create Account</a>
+                    <a href="{%url 'UserLogin'%}" class="btn btn-outline-primary btn-lg mx-2 mb-2">Sign In</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{%endblock%}

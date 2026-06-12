@@ -1,0 +1,420 @@
+/* Custom professional UI overrides */
+* {
+    transition: all 0.3s ease;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f4f7fb;
+    color: #2f3d4a;
+    letter-spacing: 0.3px;
+}
+
+.navbar {
+    background: #0a2540;
+    border: none;
+    border-radius: 0;
+}
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    color: #ffffff !important;
+}
+.navbar-nav > li > a {
+    color: #f0f4ff !important;
+    font-weight: 500;
+    padding: 14px 18px;
+}
+.navbar-nav > li > a:hover,
+.navbar-nav > li > a:focus {
+    color: #ffd166 !important;
+}
+.hero-banner {
+    min-height: 520px;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #081f3a 0%, #223f6a 100%);
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+.hero-banner .hero-content {
+    max-width: 720px;
+}
+.hero-banner h1 {
+    font-size: 3rem;
+    line-height: 1.05;
+    font-weight: 700;
+}
+.hero-banner p.lead {
+    font-size: 1.15rem;
+    margin: 1.5rem 0;
+    color: rgba(255,255,255,0.88);
+}
+.section-card {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 24px 60px rgba(12, 35, 70, 0.12);
+    margin-bottom: 2rem;
+}
+.section-card h3 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+.section-card p {
+    color: #5f6f85;
+}
+.section-card .btn {
+    min-width: 160px;
+}
+.feature-grid .card {
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+.feature-grid .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(30, 70, 120, 0.16);
+}
+.feature-grid .feature-icon {
+    width: 64px;
+    height: 64px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    background: #f1f6ff;
+    margin-bottom: 1rem;
+    color: #2a4f9b;
+}
+.chat-board {
+    background: #0f2551;
+    border-radius: 26px;
+    color: #ffffff;
+    padding: 1.5rem;
+    min-height: 540px;
+}
+.chat-board .chat-messages {
+    max-height: 420px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+}
+.chat-bubble {
+    max-width: 90%;
+    padding: 14px 18px;
+    border-radius: 18px;
+    margin-bottom: 14px;
+    line-height: 1.5;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+.chat-bubble.user {
+    background: rgba(255,255,255,0.95);
+    color: #0a2140;
+    margin-left: auto;
+}
+.chat-bubble.assistant {
+    background: rgba(255,255,255,0.12);
+    color: #edf2ff;
+}
+.chat-board .chat-footer {
+    display: flex;
+    gap: 1rem;
+}
+.chat-board input {
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+}
+.chat-board button {
+    min-width: 140px;
+    border-radius: 18px;
+}
+.btn-primary {
+    background: #1f5fea !important;
+    border-color: #1f5fea !important;
+}
+.btn-outline-secondary {
+    border-color: #d2d7e0;
+    color: #546183;
+}
+.card .table {
+    margin-bottom: 0;
+}
+.footer-custom {
+    background: #081d3b;
+    color: rgba(255,255,255,0.72);
+    padding: 2rem 0;
+}
+.footer-custom a {
+    color: #d1dcff;
+}
+.footer-custom a:hover {
+    color: #ffffff;
+}
+.card .table th,
+.card .table td {
+    border-top: none;
+}
+.badge-secondary {
+    background: #3a4d7d;
+}
+
+/* Form Styling */
+.form-control, .form-control-lg {
+    border-radius: 12px;
+    border: 1px solid #e0e6ed;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.form-control:focus, .form-control-lg:focus {
+    border-color: #1f5fea;
+    box-shadow: 0 4px 12px rgba(31, 95, 234, 0.15);
+}
+
+.form-label {
+    color: #2f3d4a;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+}
+
+.btn-lg {
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    border-radius: 12px;
+}
+
+.btn-primary {
+    background: #1f5fea !important;
+    border-color: #1f5fea !important;
+    box-shadow: 0 4px 12px rgba(31, 95, 234, 0.25);
+}
+
+.btn-primary:hover {
+    background: #1747bf !important;
+    box-shadow: 0 6px 16px rgba(31, 95, 234, 0.35);
+}
+
+.btn-outline-secondary {
+    border-color: #d2d7e0;
+    color: #546183;
+    border-width: 2px;
+    border-radius: 12px;
+}
+
+.btn-outline-secondary:hover {
+    background: #546183;
+    border-color: #546183;
+    color: #fff;
+}
+
+.alert {
+    border-radius: 12px;
+    border: none;
+    padding: 1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.alert-info {
+    background: #e7f3ff;
+    color: #0c3b70;
+}
+
+.alert-danger {
+    background: #ffe7e7;
+    color: #8b0000;
+}
+
+.alert-warning {
+    background: #fff3cd;
+    color: #856404;
+}
+
+/* Login Card Styling */
+.login-card {
+    border-radius: 20px;
+    border: none;
+}
+
+.admin-login-card {
+    border-top: 4px solid #1f5fea;
+}
+
+/* Table Styling */
+.table {
+    border-collapse: collapse;
+}
+
+.table thead th {
+    background: #f8fafc;
+    color: #2f3d4a;
+    font-weight: 700;
+    border: none;
+    border-bottom: 2px solid #e0e6ed;
+    padding: 1rem;
+}
+
+.table tbody td {
+    border-color: #e0e6ed;
+    padding: 1rem;
+    vertical-align: middle;
+}
+
+.table tbody tr:hover {
+    background: #f8fafc;
+}
+
+/* Utility Classes */
+.font-weight-600 {
+    font-weight: 600;
+}
+
+.text-muted {
+    color: #7a8a99 !important;
+}
+
+.text-white-75 {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.text-white-60 {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Card Hover Effects */
+.card {
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 16px 32px rgba(0,0,0,0.1);
+}
+
+/* Badge Styling */
+.badge {
+    border-radius: 12px;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-banner h1 { font-size: 2.3rem; }
+    .section-card { padding: 1.5rem; }
+    .form-control, .form-control-lg { padding: 0.6rem 0.85rem; }
+    .btn-lg { padding: 0.6rem 1.5rem; }
+}
+
+@media (max-width: 576px) {
+    .hero-banner { min-height: 380px; }
+    .hero-banner h1 { font-size: 1.8rem; }
+    .hero-banner p.lead { font-size: 1rem; }
+    .section-card { margin-bottom: 1.5rem; }
+}
+
+/* Pandas Dataframe styling */
+.dataframe {
+    width: 100% !important;
+    margin-bottom: 1.5rem;
+    color: #2f3d4a;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+.dataframe th {
+    background: #f8fafc;
+    color: #2f3d4a;
+    font-weight: 700;
+    border-bottom: 2px solid #e0e6ed;
+    padding: 1.2rem 1rem;
+    text-align: left;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.dataframe td {
+    border-top: 1px solid #f1f5f9;
+    padding: 1rem;
+    vertical-align: middle;
+    font-size: 0.95rem;
+    color: #4a5568;
+}
+
+.dataframe tr:hover {
+    background-color: #f8fafc;
+}
+
+/* KPI Card & Metric styles */
+.kpi-card {
+    border-radius: 20px;
+    background: #ffffff;
+    padding: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border-left: 5px solid #1f5fea;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.kpi-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(31, 95, 234, 0.1);
+}
+
+.kpi-card.danger {
+    border-left-color: #ef4444;
+}
+
+.kpi-card.success {
+    border-left-color: #10b981;
+}
+
+.kpi-card.warning {
+    border-left-color: #f59e0b;
+}
+
+.kpi-value {
+    font-size: 2.25rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-top: 0.5rem;
+    color: #0a2540;
+}
+
+.kpi-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #7a8a99;
+}
+
+/* Micro-animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+

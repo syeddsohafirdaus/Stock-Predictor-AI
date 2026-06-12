@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}AI Prediction Chat{% endblock %}
+{% block banner %}{% endblock %}
+{% block contents %}
+<section class="container py-5">
+    <div class="row">
+        <div class="col-lg-8 mb-4">
+            <div class="section-card chat-board">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <h3 class="text-white">AI Prediction Chat</h3>
+                        <p class="text-white-75">Ask the stock prediction assistant for technical signals, future price ideas, and dataset guidance.</p>
+                    </div>
+                    <span class="badge badge-secondary py-2 px-3">Live AI</span>
+                </div>
+                <div id="chatMessages" class="chat-messages"></div>
+
+                <form id="aiChatForm" class="chat-footer" method="post">
+                    {% csrf_token %}
+                    <input id="chatInput" name="message" type="text" class="form-control" placeholder="Ask for a forecast, trend summary, or dataset insight" autocomplete="off" required>
+                    <button class="btn btn-primary" type="submit">Send</button>
+                </form>
+
+                <div class="mt-4 text-white-60">
+                    <strong>Quick prompts:</strong>
+                    <button type="button" class="btn btn-sm btn-outline-secondary quick-prompt mt-2" data-prompt="What is the short-term outlook for technology stocks?">Tech outlook</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary quick-prompt mt-2" data-prompt="How should I interpret moving averages for Amazon stock?">Moving averages</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary quick-prompt mt-2" data-prompt="Show me the next five-day trend prediction for the dataset.">5-day trend</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="section-card">
+                <h3>How it works</h3>
+                <p>This interface connects your input to an open-source AI model. It provides professional market suggestions, prediction tips, and data-driven stock analysis.</p>
+                <ul class="list-unstyled">
+                    <li class="mb-3"><strong>Step 1:</strong> type a prediction question</li>
+                    <li class="mb-3"><strong>Step 2:</strong> send it to the AI assistant</li>
+                    <li class="mb-3"><strong>Step 3:</strong> review the response and follow the suggested actions</li>
+                </ul>
+                <a href="#" class="btn btn-primary">Get started with AI</a>
+            </div>
+            <div class="section-card mt-4">
+                <h4>Tips for better results</h4>
+                <p>Ask about trends, technical indicators, feature importance, or future predictions. The assistant is designed for stock-market guidance, not financial advice.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+(function() {
+    const form = document.getElementById('aiChatForm');
+    const input = document.getElementById('chatInput');
+    const messages = document.getElementById('chatMessages');
+    const quickButtons = document.querySelectorAll('.quick-prompt');
+    const apiUrl = '{% url "ai_chat_api" %}';
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    function appendMessage(text, type) {
+        const bubble = document.createElement('div');
+        bubble.className = 'chat-bubble ' + type;
+        bubble.textContent = text;
+        messages.appendChild(bubble);
+        messages.scrollTop = messages.scrollHeight;
+    }
+
+    function showAssistantTyping() {
+        const typing = document.createElement('div');
+        typing.className = 'chat-bubble assistant';
+        typing.id = 'typingBubble';
+        typing.textContent = 'AI is preparing an answer...';
+        messages.appendChild(typing);
+        messages.scrollTop = messages.scrollHeight;
+        return typing;
+    }
+
+    async function sendMessage(message) {
+        const typingBubble = showAssistantTyping();
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+                    'X-CSRFToken': csrfToken
+                },
+                body: new URLSearchParams({ message })
+            });
+            const data = await response.json();
+            messages.removeChild(typingBubble);
+            if (response.ok && data.answer) {
+                appendMessage(data.answer, 'assistant');
+            } else {
+                appendMessage(data.error || 'Unable to get a response. Try again.', 'assistant');
+            }
+        } catch (error) {
+            messages.removeChild(typingBubble);
+            appendMessage('Network or model error: ' + error.message, 'assistant');
+        }
+    }
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const value = input.value.trim();
+        if (!value) return;
+        appendMessage(value, 'user');
+        input.value = '';
+        sendMessage(value);
+    });
+
+    quickButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const prompt = this.dataset.prompt;
+            appendMessage(prompt, 'user');
+            sendMessage(prompt);
+        });
+    });
+})();
+</script>
+{% endblock %}

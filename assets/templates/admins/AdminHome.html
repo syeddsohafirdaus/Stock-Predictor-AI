@@ -1,0 +1,86 @@
+{% extends 'admins/adminbase.html'%}
+{%block contents%}
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="section-card">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h2 class="h3 font-weight-bold mb-2">Welcome to Admin Dashboard</h2>
+                            <p class="text-muted mb-0">Manage users, monitor predictions, and oversee system operations</p>
+                        </div>
+                        <div style="font-size: 3rem;">👋</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="section-card text-center">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">👥</div>
+                    <h6 class="font-weight-bold">Manage Users</h6>
+                    <p class="text-muted small mb-3">View and activate registered users</p>
+                    <a href="{%url 'RegisterUsersView'%}" class="btn btn-sm btn-primary">View Users</a>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="section-card text-center">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">📈</div>
+                    <h6 class="font-weight-bold">Stock Forecasting</h6>
+                    <p class="text-muted small mb-3">Generate future price predictions</p>
+                    <a href="{%url 'admin_forecasting'%}" class="btn btn-sm btn-primary">Forecast</a>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="section-card text-center">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">🤖</div>
+                    <h6 class="font-weight-bold">AI Chat</h6>
+                    <p class="text-muted small mb-3">Chat with AI assistant</p>
+                    <a href="{%url 'ai_chat_page'%}" class="btn btn-sm btn-primary">Chat Now</a>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="section-card text-center">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">⚙️</div>
+                    <h6 class="font-weight-bold">System Info</h6>
+                    <p class="text-muted small mb-3">View system details</p>
+                    <a href="#" class="btn btn-sm btn-primary" disabled>Coming Soon</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="section-card">
+                    <h5 class="font-weight-bold mb-4">System Architecture</h5>
+                    <p class="text-muted mb-3">
+                        This platform uses an attention-based LSTM model to predict International Stock Price trends. 
+                        The system consists of five core layers:
+                    </p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><strong>🔐 Shell Layer:</strong> User authentication & security</li>
+                                <li class="mb-2"><strong>📥 Input Layer:</strong> Data validation & preprocessing</li>
+                                <li class="mb-2"><strong>🧠 Hidden Layer:</strong> LSTM neural network processing</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><strong>👁️ Attention Layer:</strong> Trend prediction generation</li>
+                                <li class="mb-2"><strong>📤 Output Layer:</strong> Results presentation</li>
+                                <li class="mb-2"><strong>⚡ ML Stack:</strong> TensorFlow, XGBoost, Scikit-learn</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{%endblock%}

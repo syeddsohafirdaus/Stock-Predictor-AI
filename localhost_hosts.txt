@@ -1,0 +1,8 @@
+# Localhost URLs referenced in the project
+http://localhost:8000/
+http://localhost:8000/UserLogin/
+http://localhost:8000/UserRegister/
+http://localhost:8000/AdminLogin/
+http://localhost:8000/ai-chat/
+http://localhost:8000/admin/
+http://localhost:8000/RegisterUsersView/

@@ -184,4 +184,13 @@ conda deactivate
 
 
 
+## 🚀 Future Features
+Below are potential enhancements for the project:
+- Interactive stock chart visualizations
+- Real-time data fetching via websockets
+- User-defined prediction horizons
+- Integration with external financial APIs
+- Dark-mode UI toggle
+- Automated model retraining pipeline
+
 <!-- Minor update: refreshed README formatting -->

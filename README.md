@@ -177,7 +177,7 @@ conda deactivate
 [![stock](https://img.youtube.com/vi/JUUguNmhCKQ/0.jpg)](https://www.youtube.com/watch?v=JUUguNmhCKQ)
 
 
-<p align="center">
+<p align="center"> <!-- minor tweak -->
   <img src="https://forthebadge.com/images/badges/built-with-love.svg">
   <img src="https://forthebadge.com/images/badges/made-with-python.svg">
 </p>

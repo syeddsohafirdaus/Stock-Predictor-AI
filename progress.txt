@@ -2,3 +2,4 @@ Project setup
 Added data collection module
 Added preprocessing steps
 Added feature engineering
+Added ML model structure

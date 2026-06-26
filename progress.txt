@@ -1,2 +1,3 @@
 Project setup
 Added data collection module
+Added preprocessing steps

@@ -7,3 +7,4 @@ Added model training
 Added evaluation metrics
 Added prediction output
 Updated documentation
+Final improvements
